@@ -1,29 +1,26 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BrickBehaviour : MonoBehaviour
 {
-    void Start()
+    public SpriteRenderer spriteRenderer;
+    public BoxCollider2D boxCollider;
+    
+    public void Reset()
     {
-
+        SetValuesAs(true, true);
     }
 
-    void Update()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-
-    }
-
-    void OnMouseDown()
-    {
-        KillBrick();
-    }
-
-    void KillBrick()
-    {
-        Destroy(this.gameObject);
+        if (other.gameObject.name == "Ball")
+        {
+            SetValuesAs(false, false);
+        }
     }
     
-
+    void SetValuesAs(bool sprite, bool collider)
+    {
+        spriteRenderer.enabled = sprite;
+        boxCollider.enabled = collider;
+    }
 }
